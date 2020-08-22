@@ -3,7 +3,7 @@ from datetime import datetime
 import requests
 import time
 
-from ziser import dingding
+import dingding
 
 def job():
   print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
