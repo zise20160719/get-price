@@ -7,7 +7,7 @@ import dingding
 
 def job():
   print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-  printHello()
+  printPrice()
 
 def get():
   url = 'http://api.zb.live/data/v1/allTicker'
@@ -26,15 +26,18 @@ def get():
     return r_info
 
 
-def printHello():
+def printPrice():
   x = get()
-  select = ['fil6zqc','hcqc']
+  select = ['fil6zqc','omgqc']
   str = ''
   for key in x:
     if key in select:
       str += '\n['+key+ '-' + x[key]['last'] +']'
       print(key, x[key])
-  dingding.dingmessage(text='测试：\n' + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) +str)
+
+  text = '测试：\n' + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) +str
+  dingding.dingmessage(text=text)
+
 
 
 if __name__ == '__main__':
