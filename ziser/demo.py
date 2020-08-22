@@ -6,11 +6,9 @@ import time
 import dingding
 
 def job():
-  print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
   printPrice()
 
-def get():
-  url = 'http://api.zb.live/data/v1/allTicker'
+def get(url):
   while True:
     try:
       r = requests.get(url)
@@ -27,20 +25,22 @@ def get():
 
 
 def printPrice():
-  x = get()
   select = ['fil6zqc','omgqc']
-  str = ''
-  for key in x:
-    if key in select:
-      str += '\n['+key+ '-' + x[key]['last'] +']'
-      print(key, x[key])
+  url = 'http://api.zb.live/data/v1/allTicker'
+  for item in select:
+    temp = url + "?market=" + item
+    x = get(temp)
+    str = ''
+    for key in x:
+      if key in select:
+        str += '['+key+ '-' + x[key]['last'] +']\n'
 
-  text = '测试：\n' + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) +str
+  text = '测试：' +str + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
   dingding.dingmessage(text=text)
 
 
 
 if __name__ == '__main__':
   scheduler = BlockingScheduler()
-  scheduler.add_job(job, 'interval', seconds=60)
+  scheduler.add_job(job, 'interval', seconds=5)
   scheduler.start()
