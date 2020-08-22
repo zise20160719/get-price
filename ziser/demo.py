@@ -42,5 +42,5 @@ def printPrice():
 
 if __name__ == '__main__':
   scheduler = BlockingScheduler()
-  scheduler.add_job(job, 'interval', seconds=5)
+  scheduler.add_job(job, 'interval', seconds=60)
   scheduler.start()
