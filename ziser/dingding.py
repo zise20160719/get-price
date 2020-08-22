@@ -18,9 +18,9 @@ def dingmessage(text):
     "text": {
       "content": tex
     },
-    # "at": {
-    #   "isAtAll": True
-    # }
+    "at": {
+      "isAtAll": True
+    }
 
   }
   # 对请求的数据进行json封装
